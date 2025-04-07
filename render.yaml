@@ -1,6 +1,18 @@
+# Exported from Render on 2025-04-07T03:42:03Z
 services:
-  - type: web
-    name: BDSS
-    env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn django_project.wsgi:application"
+- type: web
+  name: bdss
+  runtime: python
+  repo: https://github.com/Urbanoiide/bdss
+  plan: free
+  envVars:
+  - key: ALLOWED_HOSTS
+    sync: false
+  - key: SECRET_KEY
+    sync: false
+  - key: DEBUG
+    sync: false
+  region: oregon
+  buildCommand: pip install -r requirements.txt
+  startCommand: gunicorn app:app
+version: "1"
