@@ -17,6 +17,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
+# Asegurar que los hosts locales estén presentes
+for host in ["localhost", "127.0.0.1", "[::1]"]:
+    if host not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(host)
+
 
 # Application definition
 
