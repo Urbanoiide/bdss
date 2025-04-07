@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Películas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #fff;
+        }
+        .container {
+            padding: 20px;
+        }
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            border-bottom: 1px solid black;
+        }
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #d8bdf2;
+            border: 2px solid #5e40a1;
+        }
+        .profile-name {
+            font-size: 14px;
+        }
+        .edit {
+            font-weight: bold;
+            text-decoration: none;
+            color: black;
+        }
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: black;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">PELÍCULASSS!!</div>
+    <div class="container">
+        <div class="profile">
+            <img src="user-placeholder.png" alt="User">
+            <div class="profile-name">User123</div>
+        </div>
+        <div class="profile">
+            <img src="user-placeholder.png" alt="User">
+            <div class="profile-name">John Doe</div>
+        </div>
+        <div class="profile">
+            <img src="user-placeholder.png" alt="User">
+            <div class="profile-name">John Doe</div>
+        </div>
+    </div>
+    <a href="#" class="edit">Editar</a>
+    <div class="navbar">
+        <div class="nav-item">
+            <span>🏠</span>
+            <span>Home</span>
+        </div>
+        <div class="nav-item">
+            <span>🔍</span>
+            <span>Search</span>
+        </div>
+        <div class="nav-item">
+            <span>👤</span>
+            <span>Account</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+{% block content %}
+<!-- Open Sans -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Incluye el enlace a Bootstrap si aún no lo tienes -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #1b1b1b;
+        color: white; /* Cambiar el color del texto para hacerlo legible */
+    }
+    h1 {
+
+        margin: 0 0 20px;
+        font-weight: 300;
+        font-size: 1.25rem;
+
+    }
+    .navbar {
+        font-family: 'Open Sans', sans-serif;
+    }
+    /* Estilo para los h1 dentro del navbar usando una clase específica */
+    .navbar h1 {
+        background-color: #611232; /* Fondo para los h1 dentro del navbar */
+        margin: 0;
+        font-weight: 300;
+        font-size: 1.8rem;
+        color: white; /* Aseguramos que el texto sea blanco */
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #611232;">
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <h1 style="margin: 0;">Bienvenido,</h1>
+    </a>
+    <div class="d-flex align-items-center">
+        {% if user.is_authenticated %}
+            <h1 class="mb-0 mr-3" style="color: white; display: inline-block;"><span id="saludo">Cargando saludo...</span></h1>
+        {% endif %}
+        <div class="ml-auto">
+            {% if user.is_authenticated %}
+                <span class="text-white mr-3">Hola, {{ user.username }}!</span>
+                <a href="{% url 'password_change' %}" class="text-white mr-3">Cambiar Contraseña</a>
+                <a href="{% url 'admin:index' %}" class="text-white mr-3">Administración</a>
+                <form action="{% url 'logout' %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link text-white">Cerrar Sesión</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="text-white mr-3">Iniciar Sesión</a>
+                <a href="{% url 'password_reset' %}" class="text-white">Restablecer Contraseña</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<script>
+{% if user.is_authenticated %}
+    fetch("/api/saludo/")  // Hace una solicitud GET a la API
+        .then(response => response.json())  // Convierte la respuesta en JSON
+        .then(data => {
+            document.getElementById("saludo").textContent = data.saludo;  // Muestra el saludo en el <span>
+        })
+        .catch(error => console.error("Error al obtener el saludo:", error));  // Maneja errores si la API falla
+{% endif %}
+</script>
+
+{% endblock %}

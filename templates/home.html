@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+    .checkmark { color: green; font-weight: bold; }
+    .crossmark { color: red; font-weight: bold; }
+    .pagination { margin-top: 20px; text-align: center; }
+    .pagination a, .pagination span {
+        display: inline-block;
+        padding: 8px 12px;
+        margin: 2px;
+        border: 1px solid #ccc;
+        text-decoration: none;
+        color: black;
+    }
+    .pagination .current {
+        background-color: #007BFF;
+        color: white;
+        border-color: #007BFF;
+    }
+</style>
+
+{% include 'navbar.html' %}
+
+<div class="container">
+    <br></br>
+    <a>"Al conocer lo que nos determina, podemos elegir conscientemente cómo responder y dirigir nuestras vidas".</a>
+    <br></br>
+    <h1>Total de documentos: <strong>{{ total_documentos }}</strong></h1>
+
+    {% if documentos %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Prestador</th>
+                    <th>Institución</th>
+                    <th>Carta Asignación</th>
+                    <th>Reporte Parcial</th>
+                    <th>Evaluación Desempeño</th>
+                    <th>Carta Término</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doc in documentos %}
+                    <tr>
+                        <td>{{ doc.servicio_social.prestador.matricula }}</td>
+                        <td>{{ doc.servicio_social.institucion.nombre }}</td>
+                        <td>{% if doc.carta_asignacion %}<span class="checkmark">✔</span>{% else %}<span class="crossmark">✖</span>{% endif %}</td>
+                        <td>{% if doc.reporte_parcial %}<span class="checkmark">✔</span>{% else %}<span class="crossmark">✖</span>{% endif %}</td>
+                        <td>{% if doc.evaluacion_desempeno %}<span class="checkmark">✔</span>{% else %}<span class="crossmark">✖</span>{% endif %}</td>
+                        <td>{% if doc.carta_termino %}<span class="checkmark">✔</span>{% else %}<span class="crossmark">✖</span>{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Paginación -->
+        <div class="pagination">
+            {% if documentos.has_previous %}
+                <a href="?page=1">&laquo; Primero</a>
+                <a href="?page={{ documentos.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            <span class="current">Página {{ documentos.number }} de {{ documentos.paginator.num_pages }}</span>
+
+            {% if documentos.has_next %}
+                <a href="?page={{ documentos.next_page_number }}">Siguiente</a>
+                <a href="?page={{ documentos.paginator.num_pages }}">Último &raquo;</a>
+            {% endif %}
+        </div>
+
+    {% else %}
+        <p>No hay documentos para mostrar.</p>
+    {% endif %}
+</div>
+{% endblock %}
