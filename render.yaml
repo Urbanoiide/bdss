@@ -14,5 +14,5 @@ services:
     sync: false
   region: oregon
   buildCommand: pip install -r requirements.txt
-  startCommand: gunicorn app:app
+  startCommand: gunicorn django_project.wsgi:application
 version: "1"

@@ -22,7 +22,6 @@ for host in ["localhost", "127.0.0.1", "[::1]"]:
     if host not in ALLOWED_HOSTS:
         ALLOWED_HOSTS.append(host)
 
-
 # Application definition
 
 INSTALLED_APPS = [
